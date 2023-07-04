@@ -15,15 +15,15 @@ if (mode === 'dev' || mode === 'test') {
 }
 
 try {
-	// initializeApp({
-	// 	projectId: PUBLIC_FIREBASE_PROJECT_ID,
-	// 	credential: cert({
-	// 		projectId: PUBLIC_FIREBASE_PROJECT_ID,
-	// 		clientEmail: FIREBASE_CLIENT_EMAIL,
-	// 		privateKey: FIREBASE_PRIVATE_KEY
-	// 	})
-	// });
+	initializeApp({
+		projectId: PUBLIC_FIREBASE_PROJECT_ID,
+		credential: cert({
+			projectId: PUBLIC_FIREBASE_PROJECT_ID,
+			clientEmail: FIREBASE_CLIENT_EMAIL,
+			privateKey: FIREBASE_PRIVATE_KEY
+		})
+	});
 } catch (error) {
 	if (!(error instanceof Error) || !/already exists/u.test(error.message)) throw error;
 }
-// export const adminDb = getFirestore();
+export const adminDb = getFirestore();
