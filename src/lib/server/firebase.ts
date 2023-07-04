@@ -20,7 +20,7 @@ try {
 		credential: cert({
 			projectId: PUBLIC_FIREBASE_PROJECT_ID,
 			clientEmail: FIREBASE_CLIENT_EMAIL,
-			privateKey: FIREBASE_PRIVATE_KEY
+			privateKey: JSON.parse(FIREBASE_PRIVATE_KEY)
 		})
 	});
 } catch (error) {
