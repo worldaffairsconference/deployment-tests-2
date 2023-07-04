@@ -57,7 +57,7 @@ jobs:
       - run: npx playwright install
       - run: pnpm i -g firebase-tools
       - run: firebase use test --token "${{ secrets.FIREBASE_TOKEN }}"
-      - run: firebase emulators:exec "pnpm run test:unit"
+      - run: firebase emulators:exec "pnpm run test:e2e"
   deploy:
     runs-on: ubuntu-latest
     steps:

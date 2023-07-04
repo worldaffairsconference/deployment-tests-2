@@ -15,6 +15,7 @@ if (mode === 'dev' || mode === 'test') {
 }
 
 try {
+	console.log(FIREBASE_PRIVATE_KEY);
 	initializeApp({
 		projectId: PUBLIC_FIREBASE_PROJECT_ID,
 		credential: cert({
