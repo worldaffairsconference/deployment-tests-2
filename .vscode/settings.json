@@ -1,4 +1,5 @@
 {
 	"vitest.commandLine": "pnpm test:unit:watch",
-	"testing.openTesting": "neverOpen"
+	"testing.openTesting": "neverOpen",
+	"eslint.validate": ["svelte", "typescript", "javascript"]
 }

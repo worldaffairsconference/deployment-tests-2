@@ -1,7 +1,9 @@
 <script>
+	import { z } from 'zod';
+
 	import Component from '$lib/Component.svelte';
 	import { docStore } from '$lib/firebase';
-	import { z } from 'zod';
+
 	const test = docStore(
 		'test/hi',
 		z.object({ test: z.boolean() }).strict(),

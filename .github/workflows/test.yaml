@@ -3,6 +3,7 @@ name: Run tests and deploy testing environment
 on:
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 jobs:
   unit-tests:
@@ -17,7 +18,9 @@ jobs:
         with:
           node-version: 20.x
       - run: pnpm i
-      - run: pnpm run test:unit
+      - run: pnpm i -g firebase-tools
+      - run: firebase use test --token "${{ secrets.FIREBASE_TOKEN }}"
+      - run: firebase emulators:exec "pnpm run test:unit"
       - uses: actions/github-script@v6
         with:
           script: |
@@ -52,7 +55,9 @@ jobs:
           node-version: 20.x
       - run: pnpm i
       - run: npx playwright install
-      - run: pnpm run test:e2e
+      - run: pnpm i -g firebase-tools
+      - run: firebase use test --token "${{ secrets.FIREBASE_TOKEN }}"
+      - run: firebase emulators:exec "pnpm run test:unit"
   deploy:
     runs-on: ubuntu-latest
     steps:
