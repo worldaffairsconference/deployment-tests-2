@@ -2,8 +2,6 @@ name: Firebase
 
 on:
   pull_request:
-    types:
-      - opened
 
 jobs:
   deploy:
