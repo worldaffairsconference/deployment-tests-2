@@ -20,7 +20,8 @@ jobs:
       - run: pnpm i
       - run: pnpm i -g firebase-tools
       - run: firebase use test --token "${{ secrets.FIREBASE_TOKEN }}"
-      - run: firebase emulators:exec "pnpm run test:unit"
+      - run: echo "${{ secrets.ENV }}" > .env
+      - run: firebase emulators:exec "pnpm run test:unit" --token "${{ secrets.FIREBASE_TOKEN }}"
       - uses: actions/github-script@v6
         with:
           script: |
@@ -57,7 +58,8 @@ jobs:
       - run: npx playwright install
       - run: pnpm i -g firebase-tools
       - run: firebase use test --token "${{ secrets.FIREBASE_TOKEN }}"
-      - run: firebase emulators:exec "pnpm run test:e2e"
+      - run: echo "${{ secrets.ENV }}" > .env
+      - run: firebase emulators:exec "pnpm run test:e2e" --token "${{ secrets.FIREBASE_TOKEN }}"
   deploy:
     runs-on: ubuntu-latest
     steps:
