@@ -25,6 +25,7 @@ try {
 		})
 	});
 } catch (error) {
+	console.log('!!!!!!!!!TEST!!!!!!!!!!!', FIREBASE_CLIENT_EMAIL, FIREBASE_PRIVATE_KEY);
 	if (!(error instanceof Error) || !/already exists/u.test(error.message)) throw error;
 }
 export const adminDb = getFirestore();
