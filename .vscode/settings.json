@@ -1,0 +1,4 @@
+{
+	"vitest.commandLine": "pnpm test:unit:watch",
+	"testing.openTesting": "neverOpen"
+}
