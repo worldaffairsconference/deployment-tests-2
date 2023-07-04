@@ -1,4 +1,4 @@
-name: Firebase
+name: Firebase Deploy Preview
 
 on:
   pull_request:
@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: 20.x
       - run: pnpm i -g firebase-tools
+      - run: firebase use test
       - run: firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}"
       - run: echo "headref=$GITHUB_HEAD_REF" >> $GITHUB_OUTPUT
         id: headref
@@ -26,6 +27,7 @@ jobs:
         with:
           script: |
             console.log(context.issue)
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
