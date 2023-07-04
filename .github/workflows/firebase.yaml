@@ -15,13 +15,13 @@ jobs:
           GITHUB_HEAD_REF: '${{steps.headref.outputs.headref}}'
         with:
           script: |
-            console.log(context)
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: "I CAN'T BELIEVE THIS FINALLY WORKS!!! Because of a Firebase limitation… Please run ```gh workflow run Firebase --ref " + process.env.GITHUB_HEAD_REF + "```",
-            });
+            if (context.payload.action === "opened")
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: "I CAN'T BELIEVE THIS FINALLY WORKS!!! Because of a Firebase limitation… Please run ```gh workflow run Firebase --ref " + process.env.GITHUB_HEAD_REF + "```",
+              });
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
         with:
