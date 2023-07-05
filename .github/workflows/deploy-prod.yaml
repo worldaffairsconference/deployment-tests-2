@@ -37,6 +37,6 @@ jobs:
       - name: Install firebase-tools
         run: pnpm i -g firebase-tools
       - name: Switch firebase project to prod
-        run: pnpm exec firebase use prod --token "${{ secrets.FIREBASE_TOKEN }}"
+        run: firebase use prod --token "${{ secrets.FIREBASE_TOKEN }}"
       - name: Deploy to firebase
-        run: pnpm exec firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}"
+        run: firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}"
