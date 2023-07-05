@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { z } from 'zod';
 
 	import Component from '$lib/Component.svelte';

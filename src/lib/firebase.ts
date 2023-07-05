@@ -14,9 +14,9 @@ import {
 	PUBLIC_FIREBASE_PROJECT_ID,
 	PUBLIC_FIREBASE_STORAGE_BUCKET
 } from '$env/static/public';
+import type { ZodCatchObject, ZodStrictObject } from '$lib/schemas/types';
 import { User, UserParse } from '$lib/schemas/User';
-
-import { mode } from './utils';
+import { mode } from '$lib/utils';
 
 const firebaseConfig = {
 	apiKey: PUBLIC_FIREBASE_API_KEY,
@@ -49,9 +49,8 @@ export const user = readable(auth.currentUser, (set) =>
 );
 
 export function docStore<
-	T extends z.AnyZodObject,
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	U extends z.ZodObject<any, any, any, z.infer<T>, any>
+	T extends ZodStrictObject,
+	U extends z.infer<T> extends z.infer<U> ? ZodCatchObject<T> : never
 >(path: string, schema: T, parsingSchema: U) {
 	const docRef = doc(db, path);
 
