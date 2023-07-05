@@ -1,11 +1,11 @@
-name: Deploy Firebase to production
+name: Lint and check
 
 on:
-  push:
+  pull_request:
     branches: [main]
 
 jobs:
-  deploy:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,9 +34,9 @@ jobs:
             ${{ runner.os }}-pnpm-store-
       - name: Install dependencies
         run: pnpm install
-      - name: Install firebase-tools
-        run: pnpm i -g firebase-tools
-      - name: Switch firebase project to prod
-        run: pnpm exec firebase use prod --token "${{ secrets.FIREBASE_TOKEN }}"
-      - name: Deploy to firebase
-        run: pnpm exec firebase deploy --token "${{ secrets.FIREBASE_TOKEN }}"
+      - name: Export environment variables to file
+        run: echo "${{ secrets.ENV }}" > .env
+      - name: Lint
+        run: pnpm run lint
+      - name: Check
+        run: pnpm run check
