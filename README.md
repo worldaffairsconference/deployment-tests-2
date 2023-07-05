@@ -1,21 +1,55 @@
-```
-firebase emulators:start --import ./firebase/emulator-data --export-on-exit
-```
+![Codecov](https://img.shields.io/codecov/c/github/worldaffairsconference/deployment-tests-2) ![Netlify](https://img.shields.io/netlify/4e98066d-e3af-45bd-8af5-e22bba156e34) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/worldaffairsconference/deployment-tests-2/deploy-prod.yaml) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ```
-pnpm dev
+ __      __  ______  ____
+/\ \  __/\ \/\  _  \/\  _`\
+\ \ \/\ \ \ \ \ \L\ \ \ \/\_\
+ \ \ \ \ \ \ \ \  __ \ \ \/_/_
+  \ \ \_/ \_\ \ \ \/\ \ \ \L\ \
+   \ `\___x___/\ \_\ \_\ \____/
+    '\/__//__/  \/_/\/_/\/___/
 ```
 
-```
-pnpm test:unit
-```
+# WAC-Pasiphae
 
-```
-pnpm test:unit:watch
-```
+> A new era of World Affairs Conference information technology infrastructure
 
-```
-pnpm test:e2e
-```
+## Local Development
 
-commitizen
+### Setup
+
+1. Install [Node.js 20.x.x](https://nodejs.org/en), [GitHub CLI](https://cli.github.com/), [PNPM](https://pnpm.io/installation), and [Firebase CLI](https://firebase.google.com/docs/cli).
+2. Clone the repository locally.
+   ```shell
+   gh repo clone worldaffairsconference/worldaffairs.ucc.on.ca
+   ```
+3. Install dependencies.
+   ```shell
+   pnpm i
+   ```
+4. Copy `.env.example` into `.env` and fill in the environment variable values.
+
+### Usage
+
+- To start the Firebase (Firestore + Auth) emulator, run
+  ```shell
+  firebase emulators:start --import ./firebase/emulator-data --export-on-exit
+  ```
+- To start the development server, run
+  ```shell
+  pnpm dev
+  ```
+- To run the unit tests, use
+  ```shell
+  pnpm test:unit       # To run once
+  pnpm test:unit:watch # To watch for file changes
+  ```
+- To run end-to-end tests, run
+  ```
+  pnpm test:e2e
+  ```
+
+### Source control
+
+- All commit messages should be formatted according to [AngularJS's commit message convention](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines). This repository is [Commitizen-friendly](https://github.com/commitizen/cz-cli), so running `git commit` should automatically open a prompt to ensure conformity.
+- Commits should **never** be pushed directly to the `main` branch, as this would bypass the testing phase. Instead, every code modification should be made as a pull request.
