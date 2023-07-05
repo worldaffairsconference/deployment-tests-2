@@ -4,6 +4,7 @@ import { connectFirestoreEmulator, doc, getFirestore, onSnapshot } from 'firebas
 import { derived, type Readable, readable } from 'svelte/store';
 import type { z } from 'zod';
 
+import { browser } from '$app/environment';
 import {
 	PUBLIC_FIREBASE_API_KEY,
 	PUBLIC_FIREBASE_APP_ID,
@@ -44,10 +45,16 @@ if (mode === 'dev' || mode === 'test') {
 	}
 }
 
+/**
+ * Client only
+ */
 export const user = readable(auth.currentUser, (set) =>
-	onAuthStateChanged(auth, (user) => set(user))
+	browser ? onAuthStateChanged(auth, (user) => set(user)) : set(null)
 );
 
+/**
+ * Client only
+ */
 export function docStore<
 	T extends ZodStrictObject,
 	U extends z.infer<T> extends z.infer<U> ? ZodCatchObject<T> : never
@@ -57,23 +64,25 @@ export function docStore<
 	const { subscribe } = readable<(z.infer<T> & { invalid: false | z.ZodError }) | null>(
 		null,
 		(set) =>
-			onSnapshot(docRef, (snapshot) => {
-				try {
-					if (!snapshot.exists()) set(null);
-					else {
-						const data = snapshot.data();
-						const valid = schema.safeParse(data);
-						const parsed = parsingSchema.parse(data);
-						set({
-							...parsed,
-							invalid: valid.success ? false : valid.error
-						});
-					}
-				} catch (error) {
-					console.error(error);
-					set(null);
-				}
-			})
+			browser
+				? onSnapshot(docRef, (snapshot) => {
+						try {
+							if (!snapshot.exists()) set(null);
+							else {
+								const data = snapshot.data();
+								const valid = schema.safeParse(data);
+								const parsed = parsingSchema.parse(data);
+								set({
+									...parsed,
+									invalid: valid.success ? false : valid.error
+								});
+							}
+						} catch (error) {
+							console.error(error);
+							set(null);
+						}
+				  })
+				: set(null)
 	);
 
 	return {
@@ -83,6 +92,9 @@ export function docStore<
 	};
 }
 
+/**
+ * Client only
+ */
 export const userData: Readable<User | null> = derived(user, ($user, set) => {
 	if ($user) return docStore(`users/${$user.uid}`, User, UserParse).subscribe(set);
 	else set(null);

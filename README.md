@@ -1,4 +1,4 @@
-![Codecov](https://img.shields.io/codecov/c/github/worldaffairsconference/deployment-tests-2) ![Netlify](https://img.shields.io/netlify/4e98066d-e3af-45bd-8af5-e22bba156e34) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/worldaffairsconference/deployment-tests-2/deploy-prod.yaml) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+![Codecov](https://img.shields.io/codecov/c/github/worldaffairsconference/worldaffairscon.org) ![Netlify](https://img.shields.io/netlify/4e98066d-e3af-45bd-8af5-e22bba156e34) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/worldaffairsconference/worldaffairscon.org/deploy-prod.yaml) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 ```
  __      __  ______  ____
