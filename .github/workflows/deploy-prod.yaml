@@ -1,4 +1,4 @@
-name: Deploy Firebase to production
+name: Deploy production environment
 
 on:
   push:
